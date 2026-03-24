@@ -1,0 +1,114 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:AutoClickTool_WPF">
+    <!-- Window Content -->
+    <system:String x:Key="windowTitle">FairyTale Assistant</system:String>
+        <!-- Window Active Title Content -->
+    <system:String x:Key="windowTitleRuning">Runing</system:String>
+    <system:String x:Key="windowTitleSuspending">Suspending</system:String>
+    <system:String x:Key="windowTitleNoFunction">No function is</system:String>
+    <system:String x:Key="windowTitleFunction">Function</system:String>
+    <system:String x:Key="windowTitleIs">is</system:String>
+    <system:String x:Key="windowTitleCheckCheat">May be detected by cheat check, please select the answer and restart the script.</system:String>
+    <!-- Label Version Content -->
+    <system:String x:Key="labelVersion">Version:</system:String>
+    <!-- Label Information Content -->
+    <system:String x:Key="labelHotkeyContent">Hotkey:</system:String>
+    <!-- Language Content -->
+    <system:String x:Key="labelLanguage">Language:</system:String>
+    <!-- Tab Content -->
+    <system:String x:Key="tabTestFunction">Test Functions</system:String>
+    <system:String x:Key="tabIndex">Index</system:String>
+    <system:String x:Key="tabAutoBattle">Auto Battle</system:String>
+    <system:String x:Key="tabAutoDefend">Auto Defense</system:String>
+    <system:String x:Key="tabEnterBattleKey">Auto Summon</system:String>
+    <system:String x:Key="tabBuffTarget">Auto Buff</system:String>
+    <system:String x:Key="tabAuxiliaryFunctions">Auxiliary Functions</system:String>
+    <system:String x:Key="tabSkillTraining">TrainingSupport</system:String>
+    <system:String x:Key="tabSetting">Setting</system:String>
+    <!-- tabTestFunction Content -->
+    <system:String x:Key="btnCurrentStatusCheck">Check Current Status</system:String>
+    <system:String x:Key="btnGetEnemyIndex">Get Enemy Order</system:String>
+    <system:String x:Key="btnGetEnemyIndexBmp">Get Enemy Point Bitmap</system:String>
+    <system:String x:Key="btnGetTargetBmp">Get Target Bitmap</system:String>
+    <system:String x:Key="btnGetAllItem">Get Item Bitmap</system:String>
+    <!-- TestFunction GetTargetBmp  Content -->
+    <system:String x:Key="labelGetTargetX">X</system:String>
+    <system:String x:Key="labelGetTargetY">Y</system:String>
+    <system:String x:Key="labelGetTargetWidth">Width</system:String>
+    <system:String x:Key="labelGetTargetHeight">Height</system:String>    
+    <!-- labelPetSupport Content -->
+    <system:String x:Key="labelPetSupport">Pet Support</system:String>
+    <system:String x:Key="labelPetSupportKey">Pet Hotkey</system:String>
+    <system:String x:Key="labelPetSupportTarget">Support Target</system:String>
+    <!-- comboPetSupportTarget Content -->
+    <system:String x:Key="target1">Front Row 1</system:String>
+    <system:String x:Key="target2">Front Row 2</system:String>
+    <system:String x:Key="target3">Front Row 3</system:String>
+    <system:String x:Key="target4">Front Row 4</system:String>
+    <system:String x:Key="target5">Front Row 5</system:String>
+    <system:String x:Key="target6">Enemies</system:String>
+    <!-- Comman Content -->
+    <system:String x:Key="commanFunctionAutoWalk">Auto Walk(Battle)</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionRandom">Random</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionCheatCheck">CheatCheck</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionMouseReset">MouseReset</system:String>
+    <system:String x:Key="commanFunction_RoundDisplay">RoundDisplay</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionMapCheck">MapCheck</system:String>
+    <system:String x:Key="commanTeamMember">Team Member</system:String>
+    <system:String x:Key="commanEnable">Enable</system:String>
+    <system:String x:Key="commanDisable">Disable</system:String>
+    <system:String x:Key="commanHumanSetting">HumanSetting</system:String>
+    <system:String x:Key="commanPetSetting">PetSetting</system:String>
+    <!-- tabAutoBattle Content -->
+    <system:String x:Key="labelAttackKey">Attack Hotkey</system:String>
+    <system:String x:Key="labelArenaMode">Arena Mode</system:String>
+    <!-- tabAutoDefend Content -->
+    <system:String x:Key="labelDefendKey">Defense Hotkey</system:String>
+    <!-- tabAutoEnterBattle Content -->
+    <system:String x:Key="labelSummonKey">Summon Hotkey</system:String>
+    <system:String x:Key="labelSummonAttackKey">Summon Attack</system:String>
+    <!-- tabBuffTarget Content -->
+    <system:String x:Key="labelBuffKey">Buff Hotkey</system:String>
+    <system:String x:Key="labelBuffTarget">Buff Target</system:String>
+    <!-- tabAuxiliaryFunctions Content -->
+    <system:String x:Key="labelAutoOpenCrystallBox">Auto open CrystallBox</system:String>
+    <system:String x:Key="labelAutoCheckBag">Auto check bag</system:String>
+    <system:String x:Key="labelAutoBuyCrystallBox">Auto Purchase CrystalBox</system:String>
+    <system:String x:Key="labelAutoUsingAdjustmentPill">Auto using Adjustment Pill</system:String>
+    <system:String x:Key="labelAutoNpcExchangeAlien">Automatic redemption of items</system:String>
+    <system:String x:Key="labelAutoSlotMachine">Automatic Magic Salon Slot Machine</system:String>
+    <!-- tabSkillTraining Content -->
+    <system:String x:Key="labelTrainingKey">TrainingHotkey</system:String>
+    <system:String x:Key="labelNormalAttack">NormalAttack</system:String>
+    <system:String x:Key="labelMagicPowerLess">The battle ends when your magic falls below</system:String>
+    <system:String x:Key="labelMPLDoSomething">.</system:String>
+    <system:String x:Key="labelPerRound">Several rounds of spellcasting</system:String>
+    <!-- tabSetting Content -->
+    <system:String x:Key="labelSupportDelay">Delay in auxiliary functions</system:String>
+    <system:String x:Key="labelBattleDelay">Functional Delay During Combat</system:String>
+    <system:String x:Key="labelKeyAfterDelay">Key press delay</system:String>
+    <system:String x:Key="labelSummonDelay">Entry Delay (Summoning)</system:String>
+    <system:String x:Key="labelSave">Save</system:String>
+    <system:String x:Key="labelDefault">Default</system:String>
+    <!-- DebugMessage Content -->
+    <system:String x:Key="msgDebugGameTitleIsError">The game has not started or an error has occurred</system:String>
+    <system:String x:Key="msgDebugGameSatsut_Player">Player perspective</system:String>
+    <system:String x:Key="msgDebugGameSatsut_Pet">Pet perspective</system:String>
+    <system:String x:Key="msgDebugGameSatsut_NotBattle">Non-battle perspective</system:String>
+    <system:String x:Key="msgDebugGameSatsut_Exception_Status">Exception status</system:String>
+    <system:String x:Key="msgDebugGameGetEnemyIndex">The enemy sequence number is</system:String>
+    <system:String x:Key="msgDebugGameGetEnemyUnit">unit</system:String>
+    <system:String x:Key="msgDebugGameGetEnemyError">Failed to get enemy sequence</system:String>
+    <!-- comboLanguage Content -->
+    <system:String x:Key="labelLanguageChinese">Language</system:String>
+    <system:String x:Key="comboLanguageChinese">中文</system:String>
+    <system:String x:Key="comboLanguageEnglish">English</system:String>
+    <!-- IndexLabel Content -->
+    <system:String x:Key="labelIndexTitle">Instructions</system:String>
+    <system:String x:Key="labelIndexItem1">1. Before using, please select the required feature tab and configure the settings</system:String>
+    <system:String x:Key="labelIndexItem2">2. After setting up, make sure the game window is in the foreground and not obstructed by other screens</system:String>
+    <system:String x:Key="labelIndexItem3">3. Press the hotkey to activate; press it again to pause the script</system:String>
+    <system:String x:Key="labelIndexItem4">4. Mouse reset is used to ensure that the mouse does not affect the judgmental style during inspection.</system:String>
+</ResourceDictionary>

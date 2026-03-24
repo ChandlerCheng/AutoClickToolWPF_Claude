@@ -1,0 +1,114 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:AutoClickTool_WPF">
+    <!-- Window Content -->
+    <system:String x:Key="windowTitle">FairyTale Assistant</system:String>
+        <!-- Window Active Title Content -->
+    <system:String x:Key="windowTitleRuning">啟用中</system:String>
+    <system:String x:Key="windowTitleSuspending">已停止</system:String>
+    <system:String x:Key="windowTitleNoFunction">無功能</system:String>
+    <system:String x:Key="windowTitleFunction">功能</system:String>
+    <system:String x:Key="windowTitleIs">正在</system:String>
+    <system:String x:Key="windowTitleCheckCheat">可能被作弊檢查檢測 , 請選擇答案後重啟腳本</system:String>
+    <!-- Label Version Content -->
+    <system:String x:Key="labelVersion">版本:</system:String>
+    <!-- Label Information Content -->
+    <system:String x:Key="labelHotkeyContent">啟用熱鍵:</system:String>
+    <!-- Language Content -->
+    <system:String x:Key="labelLanguage">語言:</system:String>
+    <!-- Tab Content -->
+    <system:String x:Key="tabTestFunction">測試功能</system:String>
+    <system:String x:Key="tabIndex">首頁</system:String>
+    <system:String x:Key="tabAutoBattle">自動打怪</system:String>
+    <system:String x:Key="tabAutoDefend">自動防禦</system:String>
+    <system:String x:Key="tabEnterBattleKey">自動召怪</system:String>
+    <system:String x:Key="tabBuffTarget">自動增益</system:String>
+    <system:String x:Key="tabAuxiliaryFunctions">輔助功能</system:String>
+    <system:String x:Key="tabSkillTraining">練技輔助</system:String>
+    <system:String x:Key="tabSetting">設定</system:String>
+    <!-- tabTestFunction Content -->
+    <system:String x:Key="btnCurrentStatusCheck">當前狀態檢測</system:String>
+    <system:String x:Key="btnGetEnemyIndex">取得怪物次序</system:String>
+    <system:String x:Key="btnGetEnemyIndexBmp">取得怪物點圖</system:String>
+    <system:String x:Key="btnGetTargetBmp">取得座標圖檔</system:String>
+    <system:String x:Key="btnGetAllItem">取得所有物品</system:String>
+    <!-- TestFunction GetTargetBmp  Content -->
+    <system:String x:Key="labelGetTargetX">X</system:String>
+    <system:String x:Key="labelGetTargetY">Y</system:String>
+    <system:String x:Key="labelGetTargetWidth">寬度</system:String>
+    <system:String x:Key="labelGetTargetHeight">高度</system:String>
+    <!-- labelPetSupport Content -->
+    <system:String x:Key="labelPetSupport">寵物輔助</system:String>
+    <system:String x:Key="labelPetSupportKey">寵物熱鍵</system:String>
+    <system:String x:Key="labelPetSupportTarget">輔助目標</system:String>
+    <!-- comboPetSupportTarget Content -->
+    <system:String x:Key="target1">前排1</system:String>
+    <system:String x:Key="target2">前排2</system:String>
+    <system:String x:Key="target3">前排3</system:String>
+    <system:String x:Key="target4">前排4</system:String>
+    <system:String x:Key="target5">前排5</system:String>
+    <system:String x:Key="target6">敵方</system:String>
+    <!-- Comman Content -->
+    <system:String x:Key="commanFunctionAutoWalk">自動走路</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionRandom">隨機方向</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionCheatCheck">作弊檢查</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionMouseReset">滑鼠復位</system:String>
+    <system:String x:Key="commanFunction_RoundDisplay">回合提示</system:String>
+    <system:String x:Key="commanFunctionAutoWalk_OptionMapCheck">地圖檢查</system:String>
+    <system:String x:Key="commanTeamMember">隊員</system:String>
+    <system:String x:Key="commanEnable">啟動</system:String>
+    <system:String x:Key="commanDisable">關閉</system:String>
+    <system:String x:Key="commanHumanSetting">人物設定</system:String>
+    <system:String x:Key="commanPetSetting">寵物設定</system:String>
+    <!-- tabAutoBattle Content -->
+    <system:String x:Key="labelAttackKey">攻擊熱鍵</system:String>
+    <system:String x:Key="labelArenaMode">競技場模式</system:String>
+    <!-- tabAutoDefend Content -->
+    <system:String x:Key="labelDefendKey">防禦熱鍵</system:String>
+    <!-- tabAutoEnterBattle Content -->
+    <system:String x:Key="labelSummonKey">召怪熱鍵</system:String>
+    <system:String x:Key="labelSummonAttackKey">自召自打</system:String>
+    <!-- tabBuffTarget Content -->
+    <system:String x:Key="labelBuffKey">增益熱鍵</system:String>
+    <system:String x:Key="labelBuffTarget">增益目標</system:String>
+    <!-- tabAuxiliaryFunctions Content -->
+    <system:String x:Key="labelAutoOpenCrystallBox">自動開啟魔晶箱</system:String>
+    <system:String x:Key="labelAutoCheckBag">自動檢查背包</system:String>
+    <system:String x:Key="labelAutoBuyCrystallBox">自動購買魔晶箱</system:String>
+    <system:String x:Key="labelAutoUsingAdjustmentPill">自動吃調整藥丸</system:String>
+    <system:String x:Key="labelAutoNpcExchangeAlien">自動兌換物品</system:String>
+    <system:String x:Key="labelAutoSlotMachine">自動魔法沙龍拉霸機</system:String>
+    <!-- tabSkillTraining Content -->
+    <system:String x:Key="labelTrainingKey">練技熱鍵</system:String>
+    <system:String x:Key="labelNormalAttack">一般攻擊</system:String>
+    <system:String x:Key="labelMagicPowerLess">魔力低於</system:String>
+    <system:String x:Key="labelMPLDoSomething">結束戰鬥</system:String>
+    <system:String x:Key="labelPerRound">幾回合施法</system:String>
+    <!-- tabSetting Content -->
+    <system:String x:Key="labelSupportDelay">輔助功能延遲</system:String>
+    <system:String x:Key="labelBattleDelay">戰鬥中延遲</system:String>
+    <system:String x:Key="labelKeyAfterDelay">按鍵後延遲</system:String>
+    <system:String x:Key="labelSummonDelay">招怪延遲</system:String>
+    <system:String x:Key="labelSave">儲存</system:String>
+    <system:String x:Key="labelDefault">初始化</system:String>
+    <!-- DebugMessage Content -->
+    <system:String x:Key="msgDebugGameTitleIsError">遊戲尚未啟動或發生錯誤</system:String>
+    <system:String x:Key="msgDebugGameSatsut_Player">人物視角</system:String>
+    <system:String x:Key="msgDebugGameSatsut_Pet">寵物視角</system:String>
+    <system:String x:Key="msgDebugGameSatsut_NotBattle">非戰鬥視角</system:String>
+    <system:String x:Key="msgDebugGameSatsut_Exception_Status">例外情況</system:String>
+    <system:String x:Key="msgDebugGameGetEnemyIndex">取得怪物序列為第</system:String>
+    <system:String x:Key="msgDebugGameGetEnemyUnit">隻</system:String>
+    <system:String x:Key="msgDebugGameGetEnemyError">無法取得怪物序列</system:String>
+    <!-- comboLanguage Content -->
+    <system:String x:Key="labelLanguageChinese">語系</system:String>
+    <system:String x:Key="comboLanguageChinese">中文</system:String>
+    <system:String x:Key="comboLanguageEnglish">English</system:String>
+    <!-- IndexLabel Content -->
+    <system:String x:Key="labelIndexTitle">使用說明</system:String>
+    <system:String x:Key="labelIndexItem1">1. 使用前請先選擇需要的功能標籤頁並做好設定</system:String>
+    <system:String x:Key="labelIndexItem2">2. 設定完成後請讓遊戲視窗排在最前面 , 並不要被其他畫面阻擋</system:String>
+    <system:String x:Key="labelIndexItem3">3. 啟用熱鍵按下後啟用 , 再按一次熱鍵可以暫停腳本</system:String>
+    <system:String x:Key="labelIndexItem4">4. 滑鼠復位用於確保不會在檢查時被滑鼠影響判斷式</system:String>
+</ResourceDictionary>

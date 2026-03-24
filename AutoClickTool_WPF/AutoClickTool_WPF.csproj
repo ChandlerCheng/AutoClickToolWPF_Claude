@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F8C1BA79-73A9-4661-91DE-E6CA2ECFDF83}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AutoClickTool_WPF</RootNamespace>
+    <AssemblyName>AutoClickTool_WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\BitmapFunction.cs" />
+    <Compile Include="Tool\Coordinate.cs" />
+    <Compile Include="Tool\Interface.cs" />
+    <Compile Include="Tool\Log.cs" />
+    <Page Include="Language\en-US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Language\zh-TW.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_fighting_keybar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_fighting_keybar_pet.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_fighting_keybar_player.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Win7_ItemCheckPoint_479_236_20x20.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Win7_AdjustmentPill_Yes.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_NormalCheckPoint.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Win7_CheatCheck__270_103_40x10.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_NpcExchangeAlien_1_270_280_.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_NpcExchangeAlien_2_option1_270_280_IntimacySugar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_NpcExchangeAlien_2_option3_270_340_Silver.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_NpcExchangeAlien_3_270_280_secondCheck.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_NpcExchangeAlien_4_270_280_finalCheck.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_x519_y189_CheckBuyCount.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win7_x269_y172_BuyCBCheck.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win10_NormalCheckPoint_800x600.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win10_fighting_keybar_pet_800x600.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win10_fighting_keybar_player_800x600.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win10_ItemCheckPoint_800x600.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TradeCheck__x368_y128_.bmp" />
+    <Resource Include="Resources\TradeIsSelect__x425_y184_.bmp" />
+    <Resource Include="Resources\TradeNotSelect__x425_y184_.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Item_x441_y199_FillolOre.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Item_x441_y199_DreamOre.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Item_x441_y199_Emery.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InventoryAndBank_x196_y303_.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x248_y87_BankNotSelected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x248_y87_BankSelected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x555_y331_InventoryNotSelected.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x555_y331_InventorySelected.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

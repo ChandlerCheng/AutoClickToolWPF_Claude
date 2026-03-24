@@ -1,0 +1,618 @@
+﻿<Window x:Class="AutoClickTool_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Name="mainApp"
+        ResizeMode="CanMinimize"
+        Icon="Resources/favicon.ico"
+        Title="{DynamicResource windowTitle}" Height="380" Width="480" Background="{DynamicResource groupWindowColor}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <!-- 設定值 --> 
+            <system:String x:Key="labelVersionNumber">1.0.5.7A</system:String>
+            <system:Double x:Key="ScrollViewerHeight">220</system:Double>
+            <system:Double x:Key="lineWidth">400</system:Double>
+            <system:Double x:Key="tabFontSize">16</system:Double>
+            <!-- 深色模式 -->
+            <SolidColorBrush x:Key="WindowColor_Night" Color="#3C3F41"/>
+            <SolidColorBrush x:Key="FontColor_Night" Color="White"/>
+            <SolidColorBrush x:Key="ButtonColor_Night" Color="#4E5052"/>
+            <SolidColorBrush x:Key="BorderColor_Night" Color="#BBBBBB"/>
+            <!-- 淺色模式 -->
+            <SolidColorBrush x:Key="WindowColor_Day" Color="White"/>
+            <SolidColorBrush x:Key="FontColor_Day" Color="Black"/>
+            <SolidColorBrush x:Key="ButtonColor_Day" Color="#FFDDDDDD"/>
+            <SolidColorBrush x:Key="BorderColor_Day" Color="#FF707070"/>
+            <!-- 通用參數 -->
+            <SolidColorBrush x:Key="groupWindowColor" Color="{Binding Color, Source={StaticResource WindowColor_Day}}"/>
+            <SolidColorBrush x:Key="groupFontColor" Color="{Binding Color, Source={StaticResource FontColor_Day}}"/>
+            <SolidColorBrush x:Key="groupButtonColor" Color="{Binding Color, Source={StaticResource ButtonColor_Day}}"/>
+            <SolidColorBrush x:Key="groupBorderColor" Color="{Binding Color, Source={StaticResource BorderColor_Day}}"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <Grid Margin="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                <StackPanel Orientation="Horizontal">
+                    <Label Foreground="{DynamicResource groupFontColor}" FontSize="{DynamicResource tabFontSize}" Content="{DynamicResource labelVersion}"></Label>
+                    <Label Foreground="{DynamicResource groupFontColor}" FontSize="16" Content="{DynamicResource labelVersionNumber}"></Label>
+                    <Label Foreground="{DynamicResource groupFontColor}" FontSize="16" Name="labelBuildType"></Label>
+                    <Label Foreground="{DynamicResource groupFontColor}" FontSize="16" Content="{DynamicResource labelHotkeyContent}"></Label>
+                    <Label Foreground="{DynamicResource groupFontColor}" FontSize="16" Name="labelHotkeyDisplay"></Label>
+                    <Label Foreground="{DynamicResource groupFontColor}" FontSize="16" Content="{DynamicResource labelLanguageChinese}"></Label>
+                    <ComboBox FontSize="16" Name="comboLanguage" SelectionChanged="LanguageChange" SelectedIndex="0">
+                        <ComboBoxItem Content="{DynamicResource comboLanguageChinese}"></ComboBoxItem>
+                        <ComboBoxItem Content="{DynamicResource comboLanguageEnglish}"></ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <TabControl Name="tabControlUsingMethod" SelectionChanged ="tabControlUsingMethod_SelectionChanged" TabStripPlacement="Top">
+                    <TabItem  FontSize="{DynamicResource tabFontSize}" Name="tabIndexPage" Header="{DynamicResource tabIndex}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Orientation="Vertical" Background="{DynamicResource groupWindowColor}"  Margin="2">
+                                <Label Foreground="{DynamicResource groupFontColor}"  Content="{DynamicResource labelIndexTitle}" Visibility="Collapsed"></Label>
+                                <TextBlock Foreground="{DynamicResource groupFontColor}" TextWrapping="Wrap" Text="{DynamicResource labelIndexItem1}" Visibility="Collapsed"></TextBlock>
+                                <TextBlock Foreground="{DynamicResource groupFontColor}" TextWrapping="Wrap" Text="{DynamicResource labelIndexItem2}" Visibility="Collapsed"></TextBlock>
+                                <TextBlock Foreground="{DynamicResource groupFontColor}" TextWrapping="Wrap" Text="{DynamicResource labelIndexItem3}" Visibility="Collapsed"></TextBlock>
+                                <TextBlock Foreground="{DynamicResource groupFontColor}" TextWrapping="Wrap" Text="{DynamicResource labelIndexItem4}" Visibility="Collapsed"></TextBlock>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabTestFunction" Header="{DynamicResource tabTestFunction}">
+                        <!-- ScrollViewer 包圍內容 -->
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Background="{DynamicResource groupWindowColor}"  Margin="2" Orientation="Vertical">
+                                <Expander Header="測試功能" IsExpanded="True">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" Content="X"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Content="Y"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Name="labelGetX"/>
+                                        <Label Grid.Row="0" Grid.Column="3" Name="labelGetY"/>
+
+                                        <Button Grid.Row="1" Grid.Column="0" FontSize="12" Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupButtonColor}" BorderBrush="{DynamicResource groupBorderColor}" Width="Auto" HorizontalAlignment="Stretch" Name="btnCurrentStatusCheck" Height="40" Click="btnGetAllBmp_Click" Content="{DynamicResource btnCurrentStatusCheck}"></Button>
+                                        <Button Grid.Row="1" Grid.Column="1" FontSize="12" Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupButtonColor}" BorderBrush="{DynamicResource groupBorderColor}" Width="Auto" HorizontalAlignment="Stretch" Name="btnGetEnemyIndex" Height="40" Click="btnGetEnemyIndex_Click" Content="{DynamicResource btnGetEnemyIndex}"></Button>
+                                        <Button Grid.Row="1" Grid.Column="2" FontSize="12" Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupButtonColor}" BorderBrush="{DynamicResource groupBorderColor}" Width="Auto" HorizontalAlignment="Stretch" Name="btnGetEnemyIndexBmp" Height="40" Click="btnGetEnemyIndexBmp_Click" Content="{DynamicResource btnGetEnemyIndexBmp}"></Button>
+                                        <Button Grid.Row="1" Grid.Column="3" FontSize="12" Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupButtonColor}" BorderBrush="{DynamicResource groupBorderColor}"  Width="Auto" HorizontalAlignment="Stretch" Name="btnGetAllItem" Height="40" Click="btnGetAllItem_Click" Content="{DynamicResource btnGetAllItem}"></Button>
+                                        <Button  Grid.Row="1" Grid.Column="4" FontSize="12" Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupButtonColor}" BorderBrush="{DynamicResource groupBorderColor}"  Width="Auto" HorizontalAlignment="Stretch" Name="btnGetBattleMp" Height="40" Click="btnGetBattleMp_Click" Content ="取得戰鬥血魔"></Button>
+
+                                        <Button Grid.Row="2" Grid.Column="0" FontSize="12" Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupButtonColor}" BorderBrush="{DynamicResource groupBorderColor}"  HorizontalAlignment="Stretch" Name="btnGetTargetBmp" Click="btnGetTargetBmp_Click" Content="{DynamicResource btnGetTargetBmp}"></Button>
+                                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+                                            <Label Foreground="{DynamicResource groupFontColor}" FontSize="12"  Content="{DynamicResource labelGetTargetX}"></Label>
+                                            <TextBox Height="20" Name="textGetTargetBmpX" PreviewTextInput ="textGetTargetBmp_PreviewTextInput"></TextBox>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical">
+                                            <Label Foreground="{DynamicResource groupFontColor}"  FontSize="12" Content="{DynamicResource labelGetTargetY}"></Label>
+                                            <TextBox Height="20" Name="textGetTargetBmpY" PreviewTextInput ="textGetTargetBmp_PreviewTextInput"></TextBox>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Vertical">
+                                            <Label Foreground="{DynamicResource groupFontColor}"  FontSize="12" Content="{DynamicResource labelGetTargetWidth}"></Label>
+                                            <TextBox Height="20" Name="textGetTargetBmpWidth" PreviewTextInput ="textGetTargetBmp_PreviewTextInput"></TextBox>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Vertical">
+                                            <Label Foreground="{DynamicResource groupFontColor}"  FontSize="12" Content="{DynamicResource labelGetTargetHeight}"></Label>
+                                            <TextBox Height="20" Name="textGetTargetBmpHeight" PreviewTextInput ="textGetTargetBmp_PreviewTextInput"></TextBox>
+                                        </StackPanel>
+                                    </Grid>
+                                </Expander>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabAutoBattle" Header="{DynamicResource tabAutoBattle}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Orientation="Vertical" Background="{DynamicResource groupWindowColor}"  Margin="2">
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanHumanSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="0" Content="{DynamicResource labelAttackKey}"/>
+                                        <ComboBox  Margin="2" Grid.Row="0" Grid.Column="1" Name="tab2ComboPlayerActionKey" SelectedIndex="0"/>
+                                        <Label Foreground="{DynamicResource groupFontColor}"  Grid.Row="0" Grid.Column="2" Name="tab2LabelAutoAttackKeyDebug"/>
+
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Name="tab2CheckAutoWalk" Content="{DynamicResource commanFunctionAutoWalk}"/>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Name="tab2CheckAutoWalk_OptionRandom" Content="{DynamicResource commanFunctionAutoWalk_OptionRandom}"/>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Name="tab2CheckPvpMode" Content="{DynamicResource labelArenaMode}"/>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Name="tab2CheckLikeHuman" Content="增加隨機延遲"/>
+
+                                    </Grid>
+                                </Expander>
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanPetSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Name="tab2CheckPetSupport"  Content="{DynamicResource labelPetSupport}"></CheckBox>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Name="tab2CheckPetSupportJust1"  Content="施放一次"></CheckBox>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="0" Content="{DynamicResource labelPetSupportKey}" ></Label>
+                                        <ComboBox Margin="2" Grid.Row="1" Grid.Column="1" Name="tab2ComboPetActionKey" SelectedIndex="0"/>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="2" Name="tab2LabelPetSupportKeyDebug"></Label>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="0" Content="{DynamicResource labelPetSupportTarget}" ></Label>
+                                        <ComboBox Margin="2" Grid.Row="2" Grid.Column="1" Name="tab2comboPetSupportTarget" SelectedIndex="0">
+                                            <ComboBoxItem Content="{DynamicResource target1}" />
+                                            <ComboBoxItem Content="{DynamicResource target2}" />
+                                            <ComboBoxItem Content="{DynamicResource target3}" />
+                                            <ComboBoxItem Content="{DynamicResource target4}" />
+                                            <ComboBoxItem Content="{DynamicResource target5}" />
+                                            <ComboBoxItem Content="{DynamicResource target6}" />
+                                        </ComboBox>
+                                    </Grid>
+                                </Expander>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabAutoDefend" Header="{DynamicResource tabAutoDefend}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Orientation="Vertical" Background="{DynamicResource groupWindowColor}" Margin="2">
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanHumanSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Name="tab3CheckAutoWalk" Content="{DynamicResource commanFunctionAutoWalk}"></CheckBox>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Name="tab3CheckAutoWalk_OptionRandom" Content="{DynamicResource commanFunctionAutoWalk_OptionRandom}"></CheckBox>
+
+                                    </Grid>
+                                </Expander>
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanPetSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}"  Grid.Row="0" Grid.Column="0" Content="{DynamicResource labelPetSupport}"></Label>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}"   Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Name="tab3CheckPetSupport" ></CheckBox>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="0" Content="{DynamicResource labelPetSupportKey}" ></Label>
+                                        <ComboBox Margin="2" Grid.Row="1" Grid.Column="1" Name="tab3ComboPetActionKey" SelectedIndex="0"/>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="2" Name="tab3LabelPetSupportKeyDebug"></Label>
+
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="0" Content="{DynamicResource labelPetSupportTarget}" />
+                                        <ComboBox Margin="2" Grid.Row="2" Grid.Column="1" Name="tab3comboPetSupportTarget" SelectedIndex="0">
+                                            <ComboBoxItem Content="{DynamicResource target1}" />
+                                            <ComboBoxItem Content="{DynamicResource target2}" />
+                                            <ComboBoxItem Content="{DynamicResource target3}" />
+                                            <ComboBoxItem Content="{DynamicResource target4}" />
+                                            <ComboBoxItem Content="{DynamicResource target5}" />
+                                            <ComboBoxItem Content="{DynamicResource target6}" />
+                                        </ComboBox>
+                                    </Grid>
+                                </Expander>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabAutoEnterBattle" Header="{DynamicResource tabEnterBattleKey}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Orientation="Vertical" Background="{DynamicResource groupWindowColor}"  Margin="2">
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanHumanSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="0" Content="{DynamicResource labelSummonKey}"></Label>
+                                        <ComboBox Margin="2" Grid.Row="0" Grid.Column="1" Name="tab4ComboSummonerActionKey" SelectedIndex="0"></ComboBox>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="2" Name="tab4LabelSummonKeyDebug"></Label>
+
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Name="tab4CheckSummonAttack" Content="{DynamicResource labelSummonAttackKey}"></CheckBox>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="0" Content="{DynamicResource labelAttackKey}"></Label>
+                                        <ComboBox Margin="2" Grid.Row="2" Grid.Column="1" Name="tab4ComboSummonerAttackKey" SelectedIndex="1"></ComboBox>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="2" Name="tab4LabelSummonAttackKeyDebug"></Label>
+                                    </Grid>
+                                </Expander>
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanPetSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <CheckBox  Margin="2" Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"  Name="tab4CheckPetSupport" Content="{DynamicResource labelPetSupport}" ></CheckBox>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="0" Content="{DynamicResource labelPetSupportKey}" ></Label>
+                                        <ComboBox Margin="2" Grid.Row="1" Grid.Column="1" Name="tab4ComboPetActionKey" SelectedIndex="0"></ComboBox>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="2" Name="tab4LabelPetSupportKeyDebug"></Label>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="0" Content="{DynamicResource labelPetSupportTarget}" ></Label>
+                                        <ComboBox Margin="2" Grid.Row="2" Grid.Column="1" Name="tab4comboPetSupportTarget" SelectedIndex="0">
+                                            <ComboBoxItem Content="{DynamicResource target1}" />
+                                            <ComboBoxItem Content="{DynamicResource target2}" />
+                                            <ComboBoxItem Content="{DynamicResource target3}" />
+                                            <ComboBoxItem Content="{DynamicResource target4}" />
+                                            <ComboBoxItem Content="{DynamicResource target5}" />
+                                            <ComboBoxItem Content="{DynamicResource target6}" />
+                                        </ComboBox>
+                                    </Grid>
+                                </Expander>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabAutoBuff" Header="{DynamicResource tabBuffTarget}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Orientation="Vertical" Background="{DynamicResource groupWindowColor}"  Margin="2">
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}" BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanHumanSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="0" Content="{DynamicResource labelBuffKey}"></Label>
+                                        <ComboBox Margin="2" Grid.Row="0" Grid.Column="1" Name="tab5ComboAutoBuffKey" SelectedIndex="0"></ComboBox>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="2" Name="tab5LabelAutoBuffKeyDebug"></Label>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}"  Grid.Row="1" Grid.Column="0" Content="{DynamicResource labelBuffTarget}"></Label>
+                                        <ComboBox  Margin="2" Grid.Row="1" Grid.Column="1" Name="tab5comboAutoBuffTarget" SelectedIndex="0">
+                                            <ComboBoxItem Content="{DynamicResource target1}" />
+                                            <ComboBoxItem Content="{DynamicResource target2}" />
+                                            <ComboBoxItem Content="{DynamicResource target3}" />
+                                            <ComboBoxItem Content="{DynamicResource target4}" />
+                                            <ComboBoxItem Content="{DynamicResource target5}" />
+                                        </ComboBox>
+
+                                        <CheckBox  Margin="2" Foreground="{DynamicResource groupFontColor}"    Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Name="tab5CheckAutoWalk" Content="{DynamicResource commanFunctionAutoWalk}"></CheckBox>
+                                        <CheckBox  Margin="2" Foreground="{DynamicResource groupFontColor}"   Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Name="tab5CheckAutoWalk_OptionRandom" Content="{DynamicResource commanFunctionAutoWalk_OptionRandom}"></CheckBox>
+                                    </Grid>
+                                </Expander>
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanPetSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Name="tab5CheckPetSupport" Content="{DynamicResource labelPetSupport}"></CheckBox>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="0" Content="{DynamicResource labelPetSupportKey}" ></Label>
+                                        <ComboBox Margin="2" Grid.Row="1" Grid.Column="1"  Name="tab5ComboPetActionKey" SelectedIndex="0"></ComboBox>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="2"  Name="tab5LabelPetSupportKeyDebug"></Label>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}"  Grid.Row="2" Grid.Column="0" Content="{DynamicResource labelPetSupportTarget}" ></Label>
+                                        <ComboBox  Margin="2" Grid.Row="2" Grid.Column="1" Name="tab5comboPetSupportTarget" SelectedIndex="0">
+                                            <ComboBoxItem Content="{DynamicResource target1}" />
+                                            <ComboBoxItem Content="{DynamicResource target2}" />
+                                            <ComboBoxItem Content="{DynamicResource target3}" />
+                                            <ComboBoxItem Content="{DynamicResource target4}" />
+                                            <ComboBoxItem Content="{DynamicResource target5}" />
+                                            <ComboBoxItem Content="{DynamicResource target6}" />
+                                        </ComboBox>
+                                    </Grid>
+                                </Expander>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabAuxiliaryFunctions" Header="{DynamicResource tabAuxiliaryFunctions}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}" >
+                            <StackPanel Background="{DynamicResource groupWindowColor}" Orientation="Vertical"   Margin="2">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+
+                                    <RadioButton Margin="2" Grid.Column="1" Grid.Row="0" Foreground="{DynamicResource groupFontColor}"  GroupName="groupAuxiliary" VerticalAlignment="Center" Name="radioAutoOpenCrystallBox" Content="{DynamicResource labelAutoOpenCrystallBox}" IsChecked="True"></RadioButton>
+                                    <CheckBox Margin="2" Grid.Column="2" Grid.Row="0" Content="{DynamicResource labelAutoCheckBag}" Name="checkBagAuto"/>
+                                    <RadioButton Margin="2" Grid.Column="1" Grid.Row="1" Foreground="{DynamicResource groupFontColor}"  GroupName="groupAuxiliary" VerticalAlignment="Center" Name="radioAutoBuyCrystallBox" Content="{DynamicResource labelAutoBuyCrystallBox}"/>
+                                    <TextBox  Width="70" Grid.Column="2" Grid.Row="1" Name="textBuyCBTotalCount" HorizontalAlignment="Left" Margin="5" Text="3760"/>
+
+                                    <RadioButton Margin="2" Grid.Column="1" Grid.Row="2" Foreground="{DynamicResource groupFontColor}"  GroupName="groupAuxiliary" VerticalAlignment="Center" Name="radioAutoUsingAdjustmentPill" Content="{DynamicResource labelAutoUsingAdjustmentPill}"/>
+                                    <RadioButton Margin="2" Grid.Column="1" Grid.Row="3" Foreground="{DynamicResource groupFontColor}"  GroupName="groupAuxiliary" VerticalAlignment="Center" Name="radioAutoNpcExchangeAlien" Content="{DynamicResource labelAutoNpcExchangeAlien}"/>
+                                    <RadioButton Margin="2" Grid.Column="1" Grid.Row="4" Foreground="{DynamicResource groupFontColor}"  GroupName="groupAuxiliary" VerticalAlignment="Center" Name="radioAutoLabar" Content="{DynamicResource labelAutoSlotMachine}"/>
+                                    
+                                    <RadioButton Margin="2" Grid.Column="1" Grid.Row="5" Foreground="{DynamicResource groupFontColor}"  GroupName="groupAuxiliary" VerticalAlignment="Center" Name="radioAutoTradeItem" Content="自動交易選取物品"/>
+                                    <ComboBox Margin="2" Grid.Column="2" Grid.Row="5" Name="comboTradeItemSelected" HorizontalAlignment="Left" Width="100" SelectedIndex="0">
+                                        <ComboBoxItem Content="全選"/>
+                                        <ComboBoxItem Content="夢幻礦石"/>
+                                        <ComboBoxItem Content="菲洛爾礦石"/>
+                                        <ComboBoxItem Content="金剛沙"/>
+                                    </ComboBox>
+
+                                    <RadioButton Margin="2" Grid.Column="1" Grid.Row="6" Foreground="{DynamicResource groupFontColor}"  GroupName="groupAuxiliary" VerticalAlignment="Center" Name="radioAutoBankItem" Content="自動物品欄選取物品"/>
+                                    <StackPanel Grid.Column="2" Grid.Row="6" Orientation="Horizontal">
+                                        <ComboBox Margin="2"  Name="comboClickFromSelected" HorizontalAlignment="Left" Width="100"  SelectedIndex="0">                                            
+                                            <ComboBoxItem Content="物品欄"/>
+                                            <ComboBoxItem Content="銀行"/>
+                                        </ComboBox>
+                                        <ComboBox Margin="2"  Name="comboBankItemSelected" HorizontalAlignment="Left" Width="85"  SelectedIndex="0">
+                                            <ComboBoxItem Content="全選"/>
+                                            <ComboBoxItem Content="金剛沙"/>
+                                        </ComboBox>
+                                    </StackPanel>                                    
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabSkillTraining" Header="{DynamicResource tabSkillTraining}">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Orientation="Vertical" Background="{DynamicResource groupWindowColor}"  Margin="2">
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanHumanSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="140"/>
+                                            <ColumnDefinition  Width="84"/>
+                                            <ColumnDefinition Width="84"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="10"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition/>
+                                            <RowDefinition />
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <RadioButton Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Name="tab7BattleSummon" GroupName="tab7BattleGroup" Content="{DynamicResource labelSummonKey}"/>
+                                        <ComboBox Grid.Row="0" Grid.Column="1" Name="tab7ComboSummonerActionKey" SelectedIndex="0" Margin="2"/>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="0" Grid.Column="2" Name="tab7LabelSummonKeyDebug"></Label>
+
+                                        <RadioButton Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="0" IsChecked="True" VerticalAlignment="Center" Name="tab7BattleWalk" GroupName="tab7BattleGroup" Content="{DynamicResource commanFunctionAutoWalk}"></RadioButton>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Name="tab7CheckAutoWalk_OptionRandom" Content="{DynamicResource commanFunctionAutoWalk_OptionRandom}"></CheckBox>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Name="tab7CheckAutoWalk_OptionCheckMap" Content="{DynamicResource commanFunctionAutoWalk_OptionMapCheck}"></CheckBox>
+
+                                        <RadioButton Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Name="tab7BattleTeamMember" GroupName="tab7BattleGroup" Content="{DynamicResource commanTeamMember}"></RadioButton>
+
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Name="tab7CheckSecondRoundSkill" Content="二回火刀(F5_中前)" Grid.ColumnSpan="2"/>
+
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="4" Grid.Column="0" Content="{DynamicResource labelTrainingKey}"/>
+                                        <ComboBox Grid.Row="4" Grid.Column="1" Name="tab7ComboSkillTrainingKey" SelectedIndex="1" Margin="2"/>
+                                        <ComboBox Grid.Row="4" Grid.Column="2" Name="tab7ComboSkillTrainingTarget" SelectedIndex="0" Margin="2">
+                                            <ComboBoxItem Content="{DynamicResource target1}" />
+                                            <ComboBoxItem Content="{DynamicResource target2}" />
+                                            <ComboBoxItem Content="{DynamicResource target3}" />
+                                            <ComboBoxItem Content="{DynamicResource target4}" />
+                                            <ComboBoxItem Content="{DynamicResource target5}" />
+                                            <ComboBoxItem Content="{DynamicResource target6}" />
+                                        </ComboBox>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="5" Grid.Column="0" Content="{DynamicResource labelPerRound}"></Label>
+                                        <TextBox Foreground="{DynamicResource groupFontColor}" Grid.Row="5" Grid.Column="1" Name="textRoundSpellInput" Text="1" Margin="2"/>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="7" Grid.Column="0" Content="{DynamicResource labelMagicPowerLess}"></Label>
+                                        <ComboBox Grid.Row="7" Grid.Column="1" Name="tab7ComboMPLessThan" SelectedIndex="0" Margin="2"/>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="7" Grid.Column="2" Content="{DynamicResource labelMPLDoSomething}"></Label>
+
+                                        <RadioButton Foreground="{DynamicResource groupFontColor}" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Name="tab7AttackHotkey" GroupName="tab7AttackGroup" Content="{DynamicResource labelAttackKey}"></RadioButton>
+                                        <ComboBox Grid.Row="8" Grid.Column="1" Name="tab7ComboFinalAttackKey" SelectedIndex="0" Margin="2"/>
+
+                                        <RadioButton Foreground="{DynamicResource groupFontColor}" Grid.Row="9" Grid.Column="0" IsChecked="True" VerticalAlignment="Center" Name="tab7AttackNormal" GroupName="tab7AttackGroup" Content="{DynamicResource labelNormalAttack}"></RadioButton>
+
+                                    </Grid>
+                                </Expander>
+                                <Expander Foreground="{DynamicResource groupFontColor}" Background="{DynamicResource groupWindowColor}"  BorderBrush="{DynamicResource groupBorderColor}" IsExpanded="True" Header="{DynamicResource commanPetSetting}">
+                                    <Grid Margin="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition  Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}"  Grid.Row="0" Grid.Column="0" Content="{DynamicResource labelPetSupport}"></Label>
+                                        <CheckBox  Foreground="{DynamicResource groupFontColor}"   Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Name="tab7CheckPetSupport" ></CheckBox>
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="0" Content="{DynamicResource labelPetSupportKey}" ></Label>
+                                        <ComboBox Grid.Row="1" Grid.Column="1" Name="tab7ComboPetActionKey" SelectedIndex="0"/>
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="1" Grid.Column="2" Name="tab7LabelPetSupportKeyDebug"></Label>
+
+
+                                        <Label Foreground="{DynamicResource groupFontColor}" Grid.Row="2" Grid.Column="0" Content="{DynamicResource labelPetSupportTarget}" />
+                                        <ComboBox Grid.Row="2" Grid.Column="1" Name="tab7comboPetSupportTarget" SelectedIndex="0">
+                                            <ComboBoxItem Content="{DynamicResource target1}" />
+                                            <ComboBoxItem Content="{DynamicResource target2}" />
+                                            <ComboBoxItem Content="{DynamicResource target3}" />
+                                            <ComboBoxItem Content="{DynamicResource target4}" />
+                                            <ComboBoxItem Content="{DynamicResource target5}" />
+                                            <ComboBoxItem Content="{DynamicResource target6}" />
+                                        </ComboBox>
+                                    </Grid>
+                                </Expander>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem FontSize="{DynamicResource tabFontSize}" Name="tabSetting" Header="{DynamicResource tabSetting}" Visibility="Visible">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{StaticResource ScrollViewerHeight}">
+                            <StackPanel Orientation="Vertical" Background="{DynamicResource groupWindowColor}"  Margin="2">
+                                <Grid Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="106"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="106"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource labelSupportDelay}"/>
+                                    <TextBox Grid.Row="0" Grid.Column="2" Name="textSupportDelay"/>
+
+                                    <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource labelBattleDelay}"/>
+                                    <TextBox Grid.Row="1" Grid.Column="2" Name="textKeyPressDelay"/>
+
+                                    <Label Grid.Row="2" Grid.Column="1" Content="{DynamicResource labelKeyAfterDelay}"/>
+                                    <TextBox Grid.Row="2" Grid.Column="2" Name="textMousePressDelay"/>
+
+                                    <Label Grid.Row="3" Grid.Column="1" Content="{DynamicResource labelSummonDelay}"/>
+                                    <TextBox Grid.Row="3" Grid.Column="2" Name="textSummonDelay"/>
+
+                                    <Button Grid.Row="5" Grid.Column="1" Content="{DynamicResource labelSave}" Name="btnSaveSetting" Click="btnSaveSetting_Click"/>
+                                    <Button Grid.Row="5" Grid.Column="3" Content="{DynamicResource labelDefault}" Name="btnDefaultSetting" Click="btnDefaultSetting_Click"/>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="0">
+                <Label Foreground="{DynamicResource groupFontColor}" FontSize="{DynamicResource tabFontSize}" Name="labelCheatCheckTitle" Content="{DynamicResource commanFunctionAutoWalk_OptionCheatCheck}"></Label>
+                <Label Foreground="{DynamicResource groupFontColor}" FontSize="{DynamicResource tabFontSize}" Name="labelCheatCheckStatus"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                <CheckBox Margin="2" Foreground="{DynamicResource groupFontColor}" FontSize="{DynamicResource tabFontSize}" Content="{DynamicResource commanFunctionAutoWalk_OptionMouseReset}" VerticalAlignment="Center" IsChecked="True"
+                          Name="checkMouseDefault"/>
+                <CheckBox Margin="2" Foreground="{DynamicResource groupFontColor}" FontSize="{DynamicResource tabFontSize}" Content="{DynamicResource commanFunction_RoundDisplay}" VerticalAlignment="Center" IsChecked="False"
+                          Name="checkRoundDisplay"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
