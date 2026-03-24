@@ -79,17 +79,18 @@ namespace AutoClickTool_WPF
 
             GameScript.mousePostionDefault();
             // 從畫面上擷取指定區域的圖像
-            Bitmap screenshot_NormalCheckPoint = BitmapFunction.CaptureScreen(x_LU, y_LU, 9, 30);
+            using (Bitmap screenshot_NormalCheckPoint = BitmapFunction.CaptureScreen(x_LU, y_LU, 9, 30))
+            {
+                // 比對圖像
+                double Final_NCP = BitmapFunction.CompareImages(screenshot_NormalCheckPoint, NormalCheckPoint);
+                Log.Append($"一般狀態檢測值 '{Final_NCP}')\n");
+                Log.Append($"=============================");
 
-            // 比對圖像
-            double Final_NCP = BitmapFunction.CompareImages(screenshot_NormalCheckPoint, NormalCheckPoint);
-            Log.Append($"一般狀態檢測值 '{Final_NCP}')\n");
-            Log.Append($"=============================");
-
-            if (Final_NCP > 80)
-                return true;
-            else
-                return false;
+                if (Final_NCP > 80)
+                    return true;
+                else
+                    return false;
+            }
         }
         public static bool BattleCheck_Player()
         {
@@ -111,17 +112,18 @@ namespace AutoClickTool_WPF
                 fight_keybarBMP = Properties.Resources.win7_fighting_keybar_player;
             GameScript.mousePostionDefault();
             // 從畫面上擷取指定區域的圖像
-            Bitmap screenshot_keyBar = BitmapFunction.CaptureScreen(x_key, y_key, 33, 34);
+            using (Bitmap screenshot_keyBar = BitmapFunction.CaptureScreen(x_key, y_key, 33, 34))
+            {
+                // 比對圖像
+                double Final_KeyBar = BitmapFunction.CompareImages(screenshot_keyBar, fight_keybarBMP);
+                Log.Append($"玩家檢測值為 '{Final_KeyBar}')\n");
+                Log.Append($"=============================");
 
-            // 比對圖像
-            double Final_KeyBar = BitmapFunction.CompareImages(screenshot_keyBar, fight_keybarBMP);
-            Log.Append($"玩家檢測值為 '{Final_KeyBar}')\n");
-            Log.Append($"=============================");
-
-            if (Final_KeyBar > 80)
-                return true;
-            else
-                return false;
+                if (Final_KeyBar > 80)
+                    return true;
+                else
+                    return false;
+            }
         }
         public static bool BattleCheck_Pet()
         {
@@ -144,17 +146,18 @@ namespace AutoClickTool_WPF
             else
                 fight_keybarPetBMP = Properties.Resources.win7_fighting_keybar_pet;
             // 從畫面上擷取指定區域的圖像
-            Bitmap screenshot_keyBarPet = BitmapFunction.CaptureScreen(x_key, y_key, 33, 34);
+            using (Bitmap screenshot_keyBarPet = BitmapFunction.CaptureScreen(x_key, y_key, 33, 34))
+            {
+                // 比對圖像
+                double Final_KeyBar = BitmapFunction.CompareImages(screenshot_keyBarPet, fight_keybarPetBMP);
+                Log.Append($"寵物檢測值為 '{Final_KeyBar}')\n");
+                Log.Append($"=============================");
 
-            // 比對圖像
-            double Final_KeyBar = BitmapFunction.CompareImages(screenshot_keyBarPet, fight_keybarPetBMP);
-            Log.Append($"寵物檢測值為 '{Final_KeyBar}')\n");
-            Log.Append($"=============================");
-
-            if (Final_KeyBar > 80)
-                return true;
-            else
-                return false;
+                if (Final_KeyBar > 80)
+                    return true;
+                else
+                    return false;
+            }
         }
         public static void pressDefendButton()
         {
@@ -198,48 +201,56 @@ namespace AutoClickTool_WPF
                 Bitmap[] enemyGetBmp_2 = new Bitmap[10];
                 System.Drawing.Color EnemyExistColor;
 
-                for (int i = 0; i < 10; i++)
-                    enemyGetBmp[i] = BitmapFunction.CaptureScreen(Coordinate.checkEnemy[i, 0] + xOffset, Coordinate.checkEnemy[i, 1] + yOffset, 1, 1);
-                for (int i = 0; i < 10; i++)
-                    enemyGetBmp_2[i] = BitmapFunction.CaptureScreen(Coordinate.checkEnemy_2[i, 0] + xOffset, Coordinate.checkEnemy_2[i, 1] + yOffset, 1, 1);
-
-                // 184 188 184
-                if (SystemSetting.isWin10 == true)
-                    EnemyExistColor = System.Drawing.Color.FromArgb(189, 190, 189);
-                else
-                    EnemyExistColor = System.Drawing.Color.FromArgb(255, 255, 255);
-
-                for (int i = 0; i < 10; i++)
+                try
                 {
-                    // 一次檢查 , 已知史萊姆系會無法判斷
-                    double EnemyExistRatio = BitmapFunction.CalculateColorRatio(enemyGetBmp[i], EnemyExistColor);
-                    if (EnemyExistRatio > 0)
-                    {
-                        result = i + 1;
-                        return result;
-                    }
-                    else
-                    {
-                        Log.Append($"1_檢查第'{i}'位置時(X={Coordinate.checkEnemy[i, 0]},Y={Coordinate.checkEnemy[i, 1]}) , 比對值為'{EnemyExistRatio}'");
-                        // 二次檢查 , 已知史萊姆在對話欄有字時 , 第一位會失效
-                        if (SystemSetting.isWin10 == true)
-                            EnemyExistColor = System.Drawing.Color.FromArgb(214, 211, 214);
-                        else
-                            EnemyExistColor = System.Drawing.Color.FromArgb(255, 255, 255);
+                    for (int i = 0; i < 10; i++)
+                        enemyGetBmp[i] = BitmapFunction.CaptureScreen(Coordinate.checkEnemy[i, 0] + xOffset, Coordinate.checkEnemy[i, 1] + yOffset, 1, 1);
+                    for (int i = 0; i < 10; i++)
+                        enemyGetBmp_2[i] = BitmapFunction.CaptureScreen(Coordinate.checkEnemy_2[i, 0] + xOffset, Coordinate.checkEnemy_2[i, 1] + yOffset, 1, 1);
 
-                        double EnemyExistRatio_2 = BitmapFunction.CalculateColorRatio(enemyGetBmp_2[i], EnemyExistColor);
-                        if (EnemyExistRatio_2 > 0)
+                    // 184 188 184
+                    if (SystemSetting.isWin10 == true)
+                        EnemyExistColor = System.Drawing.Color.FromArgb(189, 190, 189);
+                    else
+                        EnemyExistColor = System.Drawing.Color.FromArgb(255, 255, 255);
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        // 一次檢查 , 已知史萊姆系會無法判斷
+                        double EnemyExistRatio = BitmapFunction.CalculateColorRatio(enemyGetBmp[i], EnemyExistColor);
+                        if (EnemyExistRatio > 0)
                         {
                             result = i + 1;
                             return result;
                         }
-                        Log.Append($"2_檢查第'{i}'位置時(X={Coordinate.checkEnemy_2[i, 0]},Y={Coordinate.checkEnemy_2[i, 1]}) , 比對值為'{EnemyExistRatio}'");
+                        else
+                        {
+                            Log.Append($"1_檢查第'{i}'位置時(X={Coordinate.checkEnemy[i, 0]},Y={Coordinate.checkEnemy[i, 1]}) , 比對值為'{EnemyExistRatio}'");
+                            // 二次檢查 , 已知史萊姆在對話欄有字時 , 第一位會失效
+                            if (SystemSetting.isWin10 == true)
+                                EnemyExistColor = System.Drawing.Color.FromArgb(214, 211, 214);
+                            else
+                                EnemyExistColor = System.Drawing.Color.FromArgb(255, 255, 255);
+
+                            double EnemyExistRatio_2 = BitmapFunction.CalculateColorRatio(enemyGetBmp_2[i], EnemyExistColor);
+                            if (EnemyExistRatio_2 > 0)
+                            {
+                                result = i + 1;
+                                return result;
+                            }
+                            Log.Append($"2_檢查第'{i}'位置時(X={Coordinate.checkEnemy_2[i, 0]},Y={Coordinate.checkEnemy_2[i, 1]}) , 比對值為'{EnemyExistRatio}'");
+                        }
+
                     }
+                    Log.Append($"無法取得怪物序列");
 
+                    return 0;
                 }
-                Log.Append($"無法取得怪物序列");
-
-                return 0;
+                finally
+                {
+                    foreach (var bmp in enemyGetBmp) bmp?.Dispose();
+                    foreach (var bmp in enemyGetBmp_2) bmp?.Dispose();
+                }
             }
 
             if (DebugFunction.IsDebugMsg == true)
@@ -259,19 +270,18 @@ namespace AutoClickTool_WPF
             itemTimeBitmap = Properties.Resources.Win7_ItemCheckPoint_479_236_20x20;
 
             // 從畫面上擷取指定區域的圖像
-            Bitmap screenshot_itemTimeBitmap = BitmapFunction.CaptureScreen(x_ItemCP, y_ItemCP, 20, 20);
+            using (Bitmap screenshot_itemTimeBitmap = BitmapFunction.CaptureScreen(x_ItemCP, y_ItemCP, 20, 20))
+            {
+                // 比對圖像
+                double Final_ICP = BitmapFunction.CompareImages(screenshot_itemTimeBitmap, itemTimeBitmap);
 
-            // 比對圖像
-            double Final_ICP = BitmapFunction.CompareImages(screenshot_itemTimeBitmap, itemTimeBitmap);
+                Log.Append($"物品欄檢測值為 '{Final_ICP}')\n");
 
-
-            Log.Append($"物品欄檢測值為 '{Final_ICP}')\n");
-
-
-            if (Final_ICP > 50)
-                return true;
-            else
-                return false;
+                if (Final_ICP > 50)
+                    return true;
+                else
+                    return false;
+            }
         }
         public static void GetItemCoor(int row, int column, out int x, out int y)
         {
@@ -516,18 +526,18 @@ namespace AutoClickTool_WPF
             int yOffset = Coordinate.windowHOffset + 12;// 童話改版後物品欄已加入亂數像素點
             item_x = 0;
             item_y = 0;
-            Bitmap screenshot_ItemCBBmpGet;
             System.Drawing.Color PillExistColor = System.Drawing.Color.FromArgb(116, 85, 136);
             // 取得所有物品欄位
             GameFunction.GetItemCoor(input, out xo, out yo);
 
-            screenshot_ItemCBBmpGet = BitmapFunction.CaptureScreen(xo + xOffset, yo + yOffset, 1, 1);
-            // 比對圖像
-            double Final_ICP = BitmapFunction.CalculateColorRatio(screenshot_ItemCBBmpGet, PillExistColor);
-
+            double Final_ICP;
+            using (Bitmap screenshot_ItemCBBmpGet = BitmapFunction.CaptureScreen(xo + xOffset, yo + yOffset, 1, 1))
+            {
+                // 比對圖像
+                Final_ICP = BitmapFunction.CalculateColorRatio(screenshot_ItemCBBmpGet, PillExistColor);
+            }
 
             Log.Append($"物品欄檢測值為 '{Final_ICP}')\n");
-
 
             if (Final_ICP > 0)
             {
@@ -545,18 +555,18 @@ namespace AutoClickTool_WPF
             int yOffset = Coordinate.windowHOffset + 12;// 童話改版後物品欄已加入亂數像素點
             item_x = 0;
             item_y = 0;
-            Bitmap screenshot_ItemCBBmpGet;
             System.Drawing.Color PillExistColor = System.Drawing.Color.FromArgb(113, 148, 156);
             // 取得所有物品欄位
             GameFunction.GetItemCoor(input, out xo, out yo);
-            screenshot_ItemCBBmpGet = BitmapFunction.CaptureScreen(xo + xOffset, yo + yOffset, 1, 1);
 
-            // 比對圖像
-            double Final_ICP = BitmapFunction.CalculateColorRatio(screenshot_ItemCBBmpGet, PillExistColor);
-
+            double Final_ICP;
+            using (Bitmap screenshot_ItemCBBmpGet = BitmapFunction.CaptureScreen(xo + xOffset, yo + yOffset, 1, 1))
+            {
+                // 比對圖像
+                Final_ICP = BitmapFunction.CalculateColorRatio(screenshot_ItemCBBmpGet, PillExistColor);
+            }
 
             Log.Append($"物品欄檢測值為 '{Final_ICP}')\n");
-
 
             if (Final_ICP > 0)
             {
@@ -579,19 +589,18 @@ namespace AutoClickTool_WPF
 
             AP_UsingOK_BMP = Properties.Resources.Win7_AdjustmentPill_Yes;
             // 從畫面上擷取指定區域的圖像
-            Bitmap screenshot_AP_UsingOK = BitmapFunction.CaptureScreen(x_key, y_key, 10, 10);
+            using (Bitmap screenshot_AP_UsingOK = BitmapFunction.CaptureScreen(x_key, y_key, 10, 10))
+            {
+                // 比對圖像
+                double Final_KeyBar = BitmapFunction.CompareImages(screenshot_AP_UsingOK, AP_UsingOK_BMP);
 
-            // 比對圖像
-            double Final_KeyBar = BitmapFunction.CompareImages(screenshot_AP_UsingOK, AP_UsingOK_BMP);
+                Log.Append($"CheckItemAP_Yes 檢測值為 '{Final_KeyBar}')\n");
 
-
-            Log.Append($"CheckItemAP_Yes 檢測值為 '{Final_KeyBar}')\n");
-
-
-            if (Final_KeyBar > 80)
-                return true;
-            else
-                return false;
+                if (Final_KeyBar > 80)
+                    return true;
+                else
+                    return false;
+            }
         }
         public static double GetBattleMpRatio()
         {
@@ -603,8 +612,10 @@ namespace AutoClickTool_WPF
             x = Coordinate.windowTop[0] + xOffset_key;
             y = Coordinate.windowTop[1] + yOffset_key;
             MpExistColor = System.Drawing.Color.FromArgb(73, 206, 254);
-            Bitmap screenshot_Mp = BitmapFunction.CaptureScreen(x, y, 90, 1);
-            result = BitmapFunction.CalculateColorRatio(screenshot_Mp, MpExistColor);
+            using (Bitmap screenshot_Mp = BitmapFunction.CaptureScreen(x, y, 90, 1))
+            {
+                result = BitmapFunction.CalculateColorRatio(screenshot_Mp, MpExistColor);
+            }
             return result;
         }
         public static double GetBattleHpRatio()
@@ -617,8 +628,10 @@ namespace AutoClickTool_WPF
             x = Coordinate.windowTop[0] + xOffset_key;
             y = Coordinate.windowTop[1] + yOffset_key;
             HpExistColor = System.Drawing.Color.FromArgb(254, 128, 128);
-            Bitmap screenshot_Hp = BitmapFunction.CaptureScreen(x, y, 90, 1);
-            result = BitmapFunction.CalculateColorRatio(screenshot_Hp, HpExistColor);
+            using (Bitmap screenshot_Hp = BitmapFunction.CaptureScreen(x, y, 90, 1))
+            {
+                result = BitmapFunction.CalculateColorRatio(screenshot_Hp, HpExistColor);
+            }
             return result;
         }
         public static bool checkCheatingCheck()
@@ -634,15 +647,16 @@ namespace AutoClickTool_WPF
             Bitmap cheatCheckBitmap;
 
             cheatCheckBitmap = Properties.Resources.Win7_CheatCheck__270_103_40x10;
-            Bitmap screenshot_cheatCheckBitmap = BitmapFunction.CaptureScreen(x_cheatCheck, y_cheatCheck, 40, 10);
+            using (Bitmap screenshot_cheatCheckBitmap = BitmapFunction.CaptureScreen(x_cheatCheck, y_cheatCheck, 40, 10))
+            {
+                double Final_CCC = BitmapFunction.CompareImages(screenshot_cheatCheckBitmap, cheatCheckBitmap);
+                Log.Append($"作弊檢測值為 '{Final_CCC}')\n");
 
-            double Final_CCC = BitmapFunction.CompareImages(screenshot_cheatCheckBitmap, cheatCheckBitmap);
-            Log.Append($"作弊檢測值為 '{Final_CCC}')\n");
-
-            if (Final_CCC > 90)
-                return true;
-            else
-                return false;
+                if (Final_CCC > 90)
+                    return true;
+                else
+                    return false;
+            }
         }
         public static bool GetBattleTimeEnd()
         {
@@ -654,8 +668,10 @@ namespace AutoClickTool_WPF
             x = Coordinate.windowTop[0] + xOffset_key;
             y = Coordinate.windowTop[1] + yOffset_key;
             BTExistColor = System.Drawing.Color.FromArgb(7, 70, 190);
-            Bitmap screenshot_Hp = BitmapFunction.CaptureScreen(x, y, 160, 1);
-            result = BitmapFunction.CalculateColorRatio(screenshot_Hp, BTExistColor);
+            using (Bitmap screenshot_Hp = BitmapFunction.CaptureScreen(x, y, 160, 1))
+            {
+                result = BitmapFunction.CalculateColorRatio(screenshot_Hp, BTExistColor);
+            }
 
             if (result == 0)
                 return true;

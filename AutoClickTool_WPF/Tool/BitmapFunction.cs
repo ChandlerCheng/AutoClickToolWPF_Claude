@@ -98,17 +98,19 @@ namespace AutoClickTool_WPF.Tool
             int width = compareBmp.Width;
             int height = compareBmp.Height;
 
-            Bitmap screenshot_Bmp = CaptureScreen(x, y, width, height);
-            double Final_NCP = CompareImages(screenshot_Bmp, compareBmp);
+            using (Bitmap screenshot_Bmp = CaptureScreen(x, y, width, height))
+            {
+                double Final_NCP = CompareImages(screenshot_Bmp, compareBmp);
 
-            //MessageBox.Show($"比對值 '{Final_NCP}' \n");
+                //MessageBox.Show($"比對值 '{Final_NCP}' \n");
 
-            if (Final_NCP == (double)100)
-                return true;
-            else if (Final_NCP > ratio)
-                return true;
-            else
-                return false;
+                if (Final_NCP == (double)100)
+                    return true;
+                else if (Final_NCP > ratio)
+                    return true;
+                else
+                    return false;
+            }
         }
     }
 }

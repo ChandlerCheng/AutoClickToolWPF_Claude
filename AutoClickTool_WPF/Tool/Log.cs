@@ -79,15 +79,16 @@ namespace AutoClickTool_WPF.Tool
             int xOffset = Coordinate.windowBoxLineOffset + Coordinate.windowTop[0];
             int yOffset = Coordinate.windowHOffset + 1 + Coordinate.windowTop[1];
 
-            Bitmap[] enemyGetBmp = new Bitmap[10];
             int x, y;
 
             for (int i = 0; i < 10; i++)
             {
-                enemyGetBmp[i] = BitmapFunction.CaptureScreen(Coordinate.checkEnemy[i, 0] + xOffset, Coordinate.checkEnemy[i, 1] + yOffset, 1, 1);
                 x = Coordinate.checkEnemy[i, 0] + xOffset;
                 y = Coordinate.checkEnemy[i, 1] + yOffset;
-                enemyGetBmp[i].Save("Enemy_" + i + "_" + "x" + x + "_" + "y" + y + "_" + ".bmp");
+                using (Bitmap bmp = BitmapFunction.CaptureScreen(x, y, 1, 1))
+                {
+                    bmp.Save("Enemy_" + i + "_" + "x" + x + "_" + "y" + y + "_" + ".bmp");
+                }
             }
         }
         public static void captureTargetScreen(int in_x, int in_y, int width, int height)
@@ -95,12 +96,12 @@ namespace AutoClickTool_WPF.Tool
             // 取得怪物比較點時 y軸必須得加一
             int xOffset = Coordinate.windowBoxLineOffset + Coordinate.windowTop[0];
             int yOffset = Coordinate.windowHOffset + Coordinate.windowTop[1];
-            int x, y;
-            x = xOffset + in_x;
-            y = yOffset + in_y;
-            Bitmap GetBmp;
-            GetBmp = BitmapFunction.CaptureScreen(x, y, width, height);
-            GetBmp.Save("CaptureBitmap_" + "_" + "x" + in_x + "_" + "y" + in_y + "_" + ".bmp");
+            int x = xOffset + in_x;
+            int y = yOffset + in_y;
+            using (Bitmap GetBmp = BitmapFunction.CaptureScreen(x, y, width, height))
+            {
+                GetBmp.Save("CaptureBitmap_" + "_" + "x" + in_x + "_" + "y" + in_y + "_" + ".bmp");
+            }
         }
         public static void captureAllItemScreen()
         {
@@ -111,14 +112,18 @@ namespace AutoClickTool_WPF.Tool
             int getMax = 16;
 
             // 取得物品欄檢查點  479,236  抓小塊 (物品欄)
-            Bitmap ItemCheckBmp = BitmapFunction.CaptureScreen(479 + xOffset, 236 + yOffset, 20, 20);
-            ItemCheckBmp.Save("ItemCheck" + "_Bitmap_" + "_" + "x" + 479 + "_" + "y" + 236 + "_" + ".bmp");
-            // 取得所有物品欄位                    
+            using (Bitmap ItemCheckBmp = BitmapFunction.CaptureScreen(479 + xOffset, 236 + yOffset, 20, 20))
+            {
+                ItemCheckBmp.Save("ItemCheck" + "_Bitmap_" + "_" + "x" + 479 + "_" + "y" + 236 + "_" + ".bmp");
+            }
+            // 取得所有物品欄位
             for (i = 0; i < getMax; i++)
             {
                 GameFunction.GetItemCoor(i, out xo, out yo);
-                Bitmap ItemGetBmp = BitmapFunction.CaptureScreen(xo + xOffset, yo + yOffset, 20, 20);
-                ItemGetBmp.Save(i + "_Bitmap_" + "_" + "x" + xo + "_" + "y" + yo + "_" + ".bmp");
+                using (Bitmap ItemGetBmp = BitmapFunction.CaptureScreen(xo + xOffset, yo + yOffset, 20, 20))
+                {
+                    ItemGetBmp.Save(i + "_Bitmap_" + "_" + "x" + xo + "_" + "y" + yo + "_" + ".bmp");
+                }
             }
         }
 
@@ -138,23 +143,31 @@ namespace AutoClickTool_WPF.Tool
             MessageBox.Show($"開始取得視窗所有圖片模式 , 請在指示後進入對應的狀態再按下確認 , 期間請勿遮擋遊戲視窗");
             MessageBox.Show($"請處於非戰鬥狀態 , 以便擷取一般狀態檢查點");
             //NormalCheck
-            Bitmap screenshot_NormalCheckPoint = BitmapFunction.CaptureScreen(xNormalCheck, yNormalCheck, 9, 30);
-            screenshot_NormalCheckPoint.Save("win10_NormalCheckPoint_800x600" + ".bmp");
+            using (Bitmap screenshot_NormalCheckPoint = BitmapFunction.CaptureScreen(xNormalCheck, yNormalCheck, 9, 30))
+            {
+                screenshot_NormalCheckPoint.Save("win10_NormalCheckPoint_800x600" + ".bmp");
+            }
 
             MessageBox.Show($"請處於戰鬥狀態的人物視角 , 以便擷取人物戰鬥狀態檢查點");
             // BattleCheck_Player
-            Bitmap screenshot_keyBarPlayer = BitmapFunction.CaptureScreen(xBattlePlayer, yBattlePlayer, 33, 34);
-            screenshot_keyBarPlayer.Save("win10_fighting_keybar_player_800x600" + ".bmp");
+            using (Bitmap screenshot_keyBarPlayer = BitmapFunction.CaptureScreen(xBattlePlayer, yBattlePlayer, 33, 34))
+            {
+                screenshot_keyBarPlayer.Save("win10_fighting_keybar_player_800x600" + ".bmp");
+            }
 
             MessageBox.Show($"請處於戰鬥狀態的寵物視角 , 以便擷取寵物戰鬥狀態檢查點");
             // BattleCheck_Pet
-            Bitmap screenshot_keyBarPet = BitmapFunction.CaptureScreen(xBattlePlayer, yBattlePlayer, 33, 34);
-            screenshot_keyBarPet.Save("win10_fighting_keybar_pet_800x600" + ".bmp");
+            using (Bitmap screenshot_keyBarPet = BitmapFunction.CaptureScreen(xBattlePlayer, yBattlePlayer, 33, 34))
+            {
+                screenshot_keyBarPet.Save("win10_fighting_keybar_pet_800x600" + ".bmp");
+            }
 
             MessageBox.Show($"請處於非戰鬥狀態並打開物品欄 , 以便擷取物品欄檢查點");
             // ItemTimeCheck
-            Bitmap screenshot_itemTimeBitmap = BitmapFunction.CaptureScreen(xItemList, yItemList, 20, 20);
-            screenshot_itemTimeBitmap.Save("win10_ItemCheckPoint_800x600" + ".bmp");
+            using (Bitmap screenshot_itemTimeBitmap = BitmapFunction.CaptureScreen(xItemList, yItemList, 20, 20))
+            {
+                screenshot_itemTimeBitmap.Save("win10_ItemCheckPoint_800x600" + ".bmp");
+            }
 
             //MessageBox.Show($"請處於非戰鬥狀態並打開物品欄 , 將魔晶寶箱置於第三排第一格 ,以便擷取物品檢查點");
             // CheckItemCB_Coor
